@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('profileImage')->nullable();
-            $table->rememberToken();
+            $table->string("commentHeader");
+            $table->string("commentDetail");
+            $table->string("commentLike")->nullable();
+            $table->string("commentPopularity")->nullable();
+            $table->string("userId");
+            $table->string("blogId");
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('comments');
     }
 };

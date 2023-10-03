@@ -20,7 +20,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
+        'profileImage',
     ];
 
     /**
@@ -42,4 +44,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class, 'userId');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'userId');
+    }
 }
