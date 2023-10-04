@@ -16,6 +16,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             return response()->json([
+                'status' => 200,
                 'user' => $user,
                 'message' => 'Login success'
             ]);
@@ -52,6 +53,7 @@ class AuthController extends Controller
 
             Auth::login($user); // Oturum açma
             return response()->json([
+                'status' => 200,
                 'user' => $user,
                 'message' => 'Register success'
             ]);
