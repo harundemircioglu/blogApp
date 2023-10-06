@@ -13,6 +13,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   private loggedIn = new BehaviorSubject<boolean>(this.checkToken());
+  private currentUser = new BehaviorSubject<any>(null); // Kullanıcı bilgilerini saklamak için
 
   login(email: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/login`, { email, password }).pipe(
@@ -20,6 +21,7 @@ export class AuthService {
         if (response.user) {
           localStorage.setItem('token', response.access_token);
           this.loggedIn.next(true);
+          this.currentUser.next(response.user);
         }
       })
     );
@@ -32,11 +34,16 @@ export class AuthService {
   logout(): Observable<any> {
     localStorage.removeItem('token');
     this.loggedIn.next(false);
+    this.currentUser.next(null); // Kullanıcı çıkış yaptığında currentUser'ı null olarak ayarlayın
     return this.http.post<any>(`${this.baseUrl}/logout`, {});
   }
 
   isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
+  }
+
+  getCurrentUser(): Observable<any> {
+    return this.currentUser.asObservable();
   }
 
   private checkToken(): boolean {

@@ -14,6 +14,7 @@ import { EditTopicComponent } from './dashboard/edit-topic/edit-topic.component'
 import { ProfileComponent } from './profile/profile.component';
 import { NewBlogComponent } from './new-blog/new-blog.component';
 import { UserBlogComponent } from './profile/user-blog/user-blog.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -28,12 +29,13 @@ import { UserBlogComponent } from './profile/user-blog/user-blog.component';
     ProfileComponent,
     NewBlogComponent,
     UserBlogComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

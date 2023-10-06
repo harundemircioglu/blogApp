@@ -1,0 +1,30 @@
+<div class="menu">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="section">
+          <h4>
+            <a routerLink="/">HARUNDEMIRCIOGLU</a>
+          </h4>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="section"></div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="section">
+          <div class="login-section">
+            <a routerLink="new-blog">NEW BLOG</a>
+            <a *ngIf="!isLoggedIn" routerLink="login">LOGIN</a>
+            <a *ngIf="isLoggedIn" [routerLink]="['profile',currentUser?.id]">PROFILE</a>
+            <a *ngIf="isLoggedIn" routerLink="/" (click)="logout()">LOGOUT</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
