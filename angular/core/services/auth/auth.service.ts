@@ -12,41 +12,36 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  private loggedIn = new BehaviorSubject<boolean>(this.checkToken());
-  private currentUser = new BehaviorSubject<any>(null); // Kullanıcı bilgilerini saklamak için
-
-  login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/login`, { email, password }).pipe(
-      tap((response) => {
-        if (response.user) {
-          localStorage.setItem('token', response.access_token);
-          this.loggedIn.next(true);
-          this.currentUser.next(response.user);
-        }
+  login(requestData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login`, requestData).pipe(
+      tap((response: any) => {
+        // Giriş başarılıysa kullanıcı bilgilerini saklayabilirsiniz
+        localStorage.setItem('user', JSON.stringify(response.user));
       })
     );
   }
 
-  register(userData: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/register`, userData);
+  register(requestData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/register`, requestData).pipe(
+      tap((response: any) => {
+        localStorage.setItem('user', JSON.stringify(response.user));
+      })
+    );
   }
 
   logout(): Observable<any> {
-    localStorage.removeItem('token');
-    this.loggedIn.next(false);
-    this.currentUser.next(null); // Kullanıcı çıkış yaptığında currentUser'ı null olarak ayarlayın
-    return this.http.post<any>(`${this.baseUrl}/logout`, {});
+    return this.http.post(`${this.baseUrl}/logout`, {}).pipe(
+      tap(() => {
+        localStorage.removeItem('user');
+      })
+    );
   }
 
-  isLoggedIn(): Observable<boolean> {
-    return this.loggedIn.asObservable();
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('user');
   }
 
-  getCurrentUser(): Observable<any> {
-    return this.currentUser.asObservable();
-  }
-
-  private checkToken(): boolean {
-    return !!localStorage.getItem('token');
+  getUser(): any {
+    return JSON.parse(localStorage.getItem('user') || '{}');
   }
 }

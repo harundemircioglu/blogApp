@@ -20,19 +20,23 @@ export class NavbarComponent implements OnInit {
   currentUser: User | null = null;
 
   refresh() {
-    this.authService.isLoggedIn().subscribe(response => {
+    if (this.authService.isAuthenticated()) {
       this.isLoggedIn = true;
-      this.authService.getCurrentUser().subscribe(response => {
-        this.currentUser = response;
-        console.log(this.currentUser);
-      })
-    })
+      this.currentUser = this.authService.getUser();
+      console.log(this.currentUser);
+    }
+    else {
+      this.isLoggedIn = false;
+      this.currentUser = null;
+    }
   }
 
   logout() {
-    this.authService.logout();
-    this.router.navigate(['/']);
-    this.isLoggedIn = false;
+    this.authService.logout().subscribe(response => {
+      this.router.navigate(['/']);
+      this.isLoggedIn = false;
+      this.currentUser = null;
+    })
   }
 
   ngOnInit() {

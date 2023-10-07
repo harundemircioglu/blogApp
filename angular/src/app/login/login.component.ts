@@ -23,7 +23,7 @@ export class LoginComponent {
   registerRequest: RegisterRequest = <RegisterRequest>{};
 
   login() {
-    this.authService.login(this.loginRequest.email, this.loginRequest.password).subscribe(response => {
+    this.authService.login(this.loginRequest).subscribe(response => {
       if (response.status == 200) {
         this.router.navigate(['/']);
       }

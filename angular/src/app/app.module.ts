@@ -15,6 +15,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { NewBlogComponent } from './new-blog/new-blog.component';
 import { UserBlogComponent } from './profile/user-blog/user-blog.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    FileUploadModule
   ],
   providers: [],
   bootstrap: [AppComponent]
