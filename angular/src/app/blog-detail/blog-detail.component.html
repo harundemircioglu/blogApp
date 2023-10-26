@@ -1,1 +1,48 @@
-<p>blog-detail works!</p>
+<app-navbar></app-navbar>
+
+<div class="main bg-color">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 mt-5">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blog-section">
+              <div class="blog-header mb-5">
+                <h3>{{blog.blogHeader}}</h3>
+              </div>
+              <div class="blog-image mb-3">
+                <img [src]="blog.blogImage" alt="">
+              </div>
+              <div class="blog-info mb-3">
+                <p>{{blog.blogInfo}}</p>
+              </div>
+              <div class="blog-detail mb-3">
+                <p><i>{{blog.blogDetail}}</i></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mt-5">
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="recommended mb-5">Recommended</h3>
+            <div class="recommended-section mb-3" *ngFor="let blog of blogs">
+              <a [routerLink]="['/blog-detail',blog.id]">
+                <div class="recommended-image mb-3">
+                  <img [src]="blog.blogImage" alt="">
+                </div>
+                <div class="recommended-header mb-3">
+                  <h3>{{blog.blogHeader}}</h3>
+                </div>
+                <div class="recommended-info mb-3">
+                  <p>{{blog.blogInfo}}</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

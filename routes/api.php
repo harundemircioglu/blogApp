@@ -25,3 +25,7 @@ Route::resource('blog', BlogController::class); // BLOG CRUD
 Route::resource('comment', CommentController::class); // COMMENT CRUD
 
 Route::resource('topic', TopicController::class); // TOPIC CRUD
+
+//
+
+Route::get('blogDetail/{id}', BlogController::class, 'blogDetail');

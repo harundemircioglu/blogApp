@@ -12,4 +12,11 @@ class BlogController extends BaseController
     {
         parent::__construct(new Blog());
     }
+
+    function blogDetail($id)
+    {
+        $blog = Blog::find($id);
+
+        return response()->json($blog);
+    }
 }
