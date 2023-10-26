@@ -3,6 +3,7 @@ import { Topic } from "./topic.model";
 export class Blog {
   id: number = 0;
   blogHeader: string = "";
+  blogInfo: string = "";
   blogDetail: string = "";
   blogImage: string = "";
   blogLike: number = 0;
