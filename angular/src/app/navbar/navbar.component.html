@@ -17,10 +17,10 @@
       <div class="col-md-4">
         <div class="section">
           <div class="login-section">
-            <a routerLink="new-blog">NEW BLOG</a>
-            <a *ngIf="!isLoggedIn" routerLink="login">LOGIN</a>
-            <a *ngIf="isLoggedIn" [routerLink]="['profile',currentUser?.id]">PROFILE</a>
-            <a *ngIf="isLoggedIn" routerLink="/" (click)="logout()">LOGOUT</a>
+            <a *ngIf="!isLoggedIn" routerLink="/login">LOGIN</a>
+            <a *ngIf="isLoggedIn" routerLink="/new-blog">NEW BLOG</a>
+            <a *ngIf="isLoggedIn" [routerLink]="['/profile',currentUser?.id]">PROFILE</a>
+            <a *ngIf="isLoggedIn" (click)="logout()">LOGOUT</a>
           </div>
         </div>
       </div>
