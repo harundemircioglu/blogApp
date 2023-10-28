@@ -1,18 +1,24 @@
-import { Component } from '@angular/core';
-import { FileUploader } from 'ng2-file-upload';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'core/services/auth/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-new-blog',
   templateUrl: './new-blog.component.html',
   styleUrls: ['./new-blog.component.scss']
 })
-export class NewBlogComponent {
-  uploader: FileUploader = new FileUploader({ url: 'YOUR_UPLOAD_API_URL' });
+export class NewBlogComponent implements OnInit {
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
-  uploadFiles() {
-    this.uploader.uploadAll();
-    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      console.log('Yükleme tamamlandı:', item, status, response);
-      // Dosya yükleme işlemi tamamlandığında yapılması gereken işlemler burada gerçekleştirilebilir.
-    };
+  refresh() {
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/']);
+    }
+  }
+
+  ngOnInit() {
+    this.refresh();
   }
 }
