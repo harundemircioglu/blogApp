@@ -19,7 +19,8 @@ export class BlogDetailComponent implements OnInit {
 
   blog: any;
 
-  ngOnInit() {
+  refresh() {
+    // Tüm blogları başlangıçta çekip saklayın
     this.blogService.getBlogs().subscribe((data: any) => {
       this.blogs = data;
     });
@@ -27,11 +28,15 @@ export class BlogDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(blog => {
       this.blogId = +blog['blogId'];
 
+      // Belirli bir ID'ye sahip blogu alın
       this.blogService.getBlogById(this.blogId).subscribe(response => {
         this.blog = response;
         console.log(this.blog);
       })
+    });
+  }
 
-    })
+  ngOnInit() {
+    this.refresh();
   }
 }
