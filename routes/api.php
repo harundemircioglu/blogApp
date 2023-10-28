@@ -28,4 +28,4 @@ Route::resource('topic', TopicController::class); // TOPIC CRUD
 
 //
 
-Route::get('blogDetail/{id}', BlogController::class, 'blogDetail');
+// Route::get('blogDetail/{id}', BlogController::class, 'blogDetail');
